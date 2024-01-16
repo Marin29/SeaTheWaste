@@ -2,7 +2,6 @@ from time import sleep
 import serial
 
 def parse_gps_data(gps_data):
-    #match = re.search(r'\+CGNSINF: \d,\d,(\d{14}\.\d+),([\d.]+),([\d.]+)', gps_data)
    
     s = gps_data.split(',')
 
@@ -11,9 +10,8 @@ def parse_gps_data(gps_data):
     lon = s[4]
     return dat, lat, lon
 
+
 def localisation():
-    # Connexion au port série (à adapter en fonction de votre configuration)
-    #ser = serial.Serial('/dev/ttyS0', 9600, timeout=1)
 
     # Configuration du port série pour la communication avec le module BG96
     port = '/dev/ttyUSB0'  # Remplacez par le bon port série si nécessaire
@@ -55,3 +53,20 @@ def localisation():
         print("Les données GPS n'ont pas pu être extraites.")
     
     return parsed_data
+
+
+def fichier_texte(tup, nom_fichier):
+    try : 
+        with open(nom_fichier, 'a') as fichier:
+            for element in tup:
+                fichier.write(str(element) + '\n')
+            fichier.write('\n')
+        print(f"OK {nom_fichier}")
+    except Exception as e:
+        print(f"ERREUR {e}")
+
+
+def fonction_principale():
+    fichier_texte(localisation(), "test")
+
+fonction principale()
