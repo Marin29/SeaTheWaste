@@ -3,7 +3,7 @@ import serial #bibliothèque permettant de'utiliser un moniteur série afin de c
 import time #bibliothèque utile pour calculer le temps d'envoie du message 
 
 
-ser=serial.Serial("/dev/ttyUSB0") #on définit le port série utilisé 
+ser=serial.Serial("/dev/ttyUSB1") #on définit le port série utilisé 
 ser.baudrate=9600 #vitesse de transmission sur le port série
 
         
