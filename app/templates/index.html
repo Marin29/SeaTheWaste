@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEA THE WASTE</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #edf4f7;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #5bc0de;
+            color: white;
+            padding: 20px;
+            margin: 0;
+            width: 100%;
+        }
+
+        #container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        #table-container, #map-container {
+            width: 48%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 0; /* Add this line to remove default bottom margin */
+        }
+
+        th, td {
+            border: 1px solid #ced4da;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #5bc0de;
+            color: white;
+        }
+
+        td {
+            background-color: #f8f9fa; /* Light gray background for table cells */
+        }
+
+        #map-container {
+            height: 400px;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>SEA THE WASTE</h1>
+
+    <div id="container">
+        <div id="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Horodatage</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Type de déchet</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in data %}
+                        <tr>
+                            <td>{{ index }}</td>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td><button class="delete-button" onclick="deleteRow({{ index }})">Supprimer</button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="map-container">
+            {{ map_html | safe }}
+        </div>
+    </div>
+
+    <script>
+        function deleteRow(position) {
+            // Convert the position to a string before sending the AJAX request
+            fetch(`/delete_row/${position.toString()}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        // Reload the page after successful deletion
+                        location.reload();
+                    } else {
+                        console.error('Failed to delete row');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+</body>
+</html>
