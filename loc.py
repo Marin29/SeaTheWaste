@@ -59,7 +59,7 @@ def fichier_texte(tup, nom_fichier):
     try : 
         with open(nom_fichier, 'a') as fichier:
             for element in tup:
-                fichier.write(str(element) + '\n')
+                fichier.write(str(element) + ',')
             fichier.write('\n')
         print(f"OK {nom_fichier}")
     except Exception as e:
@@ -67,6 +67,6 @@ def fichier_texte(tup, nom_fichier):
 
 
 def fonction_principale():
-    fichier_texte(localisation(), "test")
+    fichier_texte(localisation(), "data")
 
-fonction principale()
+#fonction principale()
