@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import csv
 import folium
 from folium import plugins
+import loc
 
 app = Flask(__name__)
 
