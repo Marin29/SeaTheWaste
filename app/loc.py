@@ -55,18 +55,19 @@ def localisation():
     return parsed_data
 
 
-#def fichier_texte(tup, nom_fichier):
-    #try : 
-        #with open(nom_fichier, 'a') as fichier:
-            #for element in tup:
-                #fichier.write(str(element) + ',')
-            #fichier.write('\n')
-        #print(f"OK {nom_fichier}")
-    #except Exception as e:
-        #print(f"ERREUR {e}")
+def Fichier(tup, nom_fichier):
+    
+    try : 
+        with open(nom_fichier, 'a') as fichier:
+            for element in tup:
+                fichier.write(str(element) + ',')
+            fichier.write('\n')
+        print(f"OK {nom_fichier}")
+    except Exception as e:
+        print(f"ERREUR {e}")
 
 
-def fonction_principale():
+def Loc():
     #fichier_texte(localisation(), "data")
     localisation()
 
